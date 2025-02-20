@@ -12,6 +12,7 @@ public class G19 {
     public static void main(String[] args) {
 
     	CaesarCipher cipher = new CaesarCipher(4);
+		//System.out.println(cipher.shifter());
 
     	System.out.println(cipher.encrypt("hello world!"));
     	System.out.println(cipher.decrypt("ukq zez ep!"));
