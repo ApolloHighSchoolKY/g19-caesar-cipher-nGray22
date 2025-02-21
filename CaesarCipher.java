@@ -10,52 +10,72 @@
 public class CaesarCipher {
 
 	private char[] alphabet={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	private char[] shifted={'z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y'};
+	private char[] shifted;
 	private int shift;
 
     public CaesarCipher() {
-        alphabet[4]='e';
-        shifted[4]='d';
+        shifted = new char[26];
+        shifter(shift);
         shift=1;
 
 
     }
 
     public CaesarCipher(int num){
-
+        shifted = new char[26];
         shift = num;
+        shifter(shift);
     }
 
     public String encrypt(String message){
         String x="";
+        boolean find=false;
         for(int p=0; p<message.length(); p++)
+        {find=false;
         for(int i=0; i<alphabet.length; i++)
-            if(alphabet[i]==indexOf(message.substring(p,p+1)))
-            x += shifter() + "";
-            else
-            x += message.substring(p,p+1);
-
-        return x + "";
+        {
+            
+            if(message.charAt(p) == alphabet[i]){
+                find=true;
+            x += shifted[i];}
+           
+           
+       
+        }
+            if(find==false)
+            x+=message.charAt(p);
+        
     }
+   return x + ""; 
+}
 
     public String decrypt(String message){
+        String x="";
+        boolean find=false;
         for(int p=0; p<message.length(); p++)
-        for(int i=0; i<shifted.length; i++)
-            if(shifted[i]==indexOf(message.substring(p,p+1)))
-            x += shifter() + "";
-            else
-            x += message.substring(p,p+1);
+        {find=false;
+        for(int i=0; i<alphabet.length; i++)
+        {
+            
+            if(message.charAt(p) == shifted[i]){
+                find=true;
+            x += alphabet[i];}
+           
         
-        return "";
+       
+        }
+            if(find==false)
+            x+=message.charAt(p);
+        
+    }
+        return x+"";
     }
 
     public void shifter(int num){
         //position+num%26
         
-        for(int i=0; i<alphabet.length-num; i++)
-         if(i+num<alphabet.length)
-          shifted[i+num]=alphabet[i];
-         else if(i+num>=alphabet.length)
+        for(int i=0; i<alphabet.length; i++)
+          
             shifted[(i+num)%26]= alphabet[i];
     }
 
